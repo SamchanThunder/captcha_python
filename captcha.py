@@ -1,7 +1,74 @@
 from tkinter import *
 from tkinter import ttk
+from PIL import ImageTk, Image
 from listWords import words
 import random
+
+def rotate_captcha():
+    ROOT = Tk()
+    ROOT.geometry("500x450")
+
+    label=Label(ROOT, text="Make the cupcake the same direction as the arrow.", font=("Arial 15 bold"))
+    label.pack()
+
+    global answerDirection
+    answerDirection = 0
+    answer = random.randint(1,8)
+    arrows = ["↗","→","↘","↓","↙","←","↖"]
+    answerText = arrows[answer]
+
+    arrow_label = Label(ROOT, text=answerText, font=("Arial", 50, "bold"))
+    arrow_label.pack()
+
+    img = Image.open("./images/cake.png").resize((180,180))
+    global img_tk
+    img_tk = ImageTk.PhotoImage(img)
+    panel = Label(ROOT, image=img_tk)
+    panel.image = img_tk  
+    panel.pack()
+
+    s = ttk.Style()
+    s.configure("TButton", font=("Arial 15"))
+
+    def rotate_image(degrees):
+        rotated_img = img.rotate(degrees)
+        return ImageTk.PhotoImage(rotated_img)
+
+    def turnRight():
+        global answerDirection
+        answerDirection = (answerDirection + 1) % 8
+        rotated_img = img.rotate(answerDirection * 45)
+        panel.config(image=ImageTk.PhotoImage(rotated_img))
+        panel.image = ImageTk.PhotoImage(rotated_img)
+
+    def turnLeft():
+        global answerDirection
+        answerDirection = (answerDirection - 1) % 8
+        rotated_img = img.rotate(answerDirection * 45)
+        panel.config(image=ImageTk.PhotoImage(rotated_img))
+        panel.image = ImageTk.PhotoImage(rotated_img) 
+    
+    global tries
+    tries = 0
+    def submit_action():
+        global tries 
+        if(answer == answerDirection):
+            print("Successful")
+            ROOT.destroy()
+        else:
+            print("Wrong. Try: " + str(tries + 1))
+            tries += 1
+
+        if(tries == 4):
+            ROOT.destroy()
+            rotate_captcha()
+
+    ttk.Button(ROOT, text= "<", width= 5, style="TButton", command=turnLeft).pack(side="left", padx=50)
+    ttk.Button(ROOT, text= ">", width= 5, style="TButton", command=turnRight).pack(side="right", padx=50)
+    ttk.Button(ROOT, text= "Submit", width= 20, style="TButton", command=submit_action).pack(side="bottom", pady=60)
+
+    ROOT.mainloop()
+
 
 def text_captcha():
     ROOT = Tk()
