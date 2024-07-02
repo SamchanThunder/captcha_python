@@ -1,4 +1,4 @@
-**Custom Verification Captchas in Python from Scratch** -- Uses Tkinter Module (for UI) and Random Module (for variety in captchas) 
+**Custom Verification Captchas in Python** -- Uses Tkinter Module (for UI) and Random Module (for variety in captchas) 
 
 1. Rotate Captcha (Rotate image to the correct direction.)
 
