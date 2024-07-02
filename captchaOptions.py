@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
 from listWords import words
+from captcha.image import ImageCaptcha
 import random
 
 def rotate_captcha():
@@ -120,7 +121,7 @@ def text_captcha():
 
 def math_captcha():
     ROOT = Tk()
-    ROOT.geometry("500x225")
+    ROOT.geometry("550x250")
 
     numbers = []
     for x in range(2):
@@ -128,11 +129,17 @@ def math_captcha():
         numbers.append(tempNum)
     
     mathAnswer = numbers[0] + numbers[1]
+    mathDisplay = str(numbers[0]) + "   " + str(numbers[1])
 
-    mathLabel = Label(ROOT, text=str(numbers[0]) + " + " + str(numbers[1]), font=("Arial", 30))
-    mathLabel.pack(pady=7)
+    image = ImageCaptcha(width = 300, height = 150)
+    data = image.generate(mathDisplay)  
+    image.write(mathDisplay, 'CAPTCHA.png')
 
-    label=Label(ROOT, text="What is the answer?", font=("Arial 22 bold underline"))
+    captcha_image = PhotoImage(file='CAPTCHA.png')
+    image_label = Label(ROOT, image=captcha_image)
+    image_label.pack()
+
+    label=Label(ROOT, text="What is the sum of the two numbers?", font=("Arial 22 bold underline"))
     label.pack()
 
     inputLabel = Entry(ROOT, width=300, font=("Arial 22"), justify='center')
