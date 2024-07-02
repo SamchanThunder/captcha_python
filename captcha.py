@@ -8,21 +8,22 @@ def rotate_captcha():
     ROOT = Tk()
     ROOT.geometry("500x450")
 
-    label=Label(ROOT, text="Make the cupcake the same direction as the arrow.", font=("Arial 15 bold"))
+    label=Label(ROOT, text="Make the cupcake the closest direction to the arrow.", font=("Arial 15 bold"))
     label.pack()
 
     global answerDirection
     answerDirection = 0
-    answer = random.randint(1,8)
-    arrows = ["↗","→","↘","↓","↙","←","↖"]
+    answer = random.randint(1,7)
+    print(answer)
+    arrows = ['', '↖', '←', '↙', '↓', '↘', '→', '↗']
     answerText = arrows[answer]
 
     arrow_label = Label(ROOT, text=answerText, font=("Arial", 50, "bold"))
     arrow_label.pack()
 
     img = Image.open("./images/cake.png").resize((180,180))
-    global img_tk
     img_tk = ImageTk.PhotoImage(img)
+    global panel
     panel = Label(ROOT, image=img_tk)
     panel.image = img_tk  
     panel.pack()
@@ -36,17 +37,20 @@ def rotate_captcha():
 
     def turnRight():
         global answerDirection
-        answerDirection = (answerDirection + 1) % 8
-        rotated_img = img.rotate(answerDirection * 45)
-        panel.config(image=ImageTk.PhotoImage(rotated_img))
-        panel.image = ImageTk.PhotoImage(rotated_img)
-
+        answerDirection = (answerDirection - 1) % 8
+        print(answerDirection)
+        rotated_img = img.rotate(answerDirection * 45).resize((180, 180))
+        img_tk = ImageTk.PhotoImage(rotated_img)
+        panel.config(image=img_tk)
+        panel.image = img_tk
+ 
     def turnLeft():
         global answerDirection
-        answerDirection = (answerDirection - 1) % 8
-        rotated_img = img.rotate(answerDirection * 45)
-        panel.config(image=ImageTk.PhotoImage(rotated_img))
-        panel.image = ImageTk.PhotoImage(rotated_img) 
+        answerDirection = (answerDirection + 1) % 8
+        rotated_img = img.rotate(answerDirection * 45).resize((180, 180))
+        img_tk = ImageTk.PhotoImage(rotated_img)
+        panel.config(image=img_tk)
+        panel.image = img_tk
     
     global tries
     tries = 0
