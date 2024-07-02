@@ -129,7 +129,7 @@ def math_captcha():
         numbers.append(tempNum)
     
     mathAnswer = numbers[0] + numbers[1]
-    mathDisplay = str(numbers[0]) + "   " + str(numbers[1])
+    mathDisplay = str(numbers[0]) + "  " + str(numbers[1])
 
     image = ImageCaptcha(width = 300, height = 150)
     data = image.generate(mathDisplay)  
