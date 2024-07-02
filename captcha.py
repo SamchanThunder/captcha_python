@@ -14,7 +14,6 @@ def rotate_captcha():
     global answerDirection
     answerDirection = 0
     answer = random.randint(1,7)
-    print(answer)
     arrows = ['', '↖', '←', '↙', '↓', '↘', '→', '↗']
     answerText = arrows[answer]
 
@@ -33,7 +32,6 @@ def rotate_captcha():
     def turnRight():
         global answerDirection
         answerDirection = (answerDirection - 1) % 8
-        print(answerDirection)
         rotated_img = img.rotate(answerDirection * 45).resize((180, 180))
         img_tk = ImageTk.PhotoImage(rotated_img)
         panel.config(image=img_tk)
