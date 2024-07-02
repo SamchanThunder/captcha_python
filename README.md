@@ -6,7 +6,7 @@
 
 3. Math Captcha (What is the answer to this expression?)
 
-Examples: 
+**Examples:**
 
 ![image](https://github.com/SamchanThunder/captcha_python/assets/81918438/d6871f7c-d592-46d6-b376-40d5ca993282)
 
