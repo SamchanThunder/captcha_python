@@ -1,5 +1,5 @@
 from captcha import rotate_captcha, text_captcha, math_captcha
 
 rotate_captcha()
-# text_captcha()
-# math_captcha()
+text_captcha()
+math_captcha()

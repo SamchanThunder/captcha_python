@@ -23,17 +23,12 @@ def rotate_captcha():
 
     img = Image.open("./images/cake.png").resize((180,180))
     img_tk = ImageTk.PhotoImage(img)
-    global panel
     panel = Label(ROOT, image=img_tk)
     panel.image = img_tk  
     panel.pack()
 
     s = ttk.Style()
     s.configure("TButton", font=("Arial 15"))
-
-    def rotate_image(degrees):
-        rotated_img = img.rotate(degrees)
-        return ImageTk.PhotoImage(rotated_img)
 
     def turnRight():
         global answerDirection
