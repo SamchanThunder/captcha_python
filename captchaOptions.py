@@ -121,7 +121,7 @@ def text_captcha():
 
 def math_captcha():
     ROOT = Tk()
-    ROOT.geometry("550x250")
+    ROOT.geometry("550x320")
 
     numbers = []
     for x in range(2):
